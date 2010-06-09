@@ -3,10 +3,13 @@ CFLAGS=-gfull -O0 -I..
 INCLUDES=-I..
 FULL_CFLAGS=$(CFLAGS) $(INCLUDES)
 
-all: libAR.a libV4LVideo.a
+all: ceilingcat libAR.a libV4LVideo.a
 	echo "BEES"
 
-libAR.a: AR/*.c AR/*.h
+ceilingcat: ceilingcat.c AR/*.h AR/sys/*.h libAR.a libV4LVideo.a
+	$(CC) -o $@ $(FULL_CFLAGS) $< -L. -lAR -lV4LVideo
+
+libAR.a: AR/*.c AR/*.h AR/sys/*.h
 	cd AR ; $(CC) $(FULL_CFLAGS) -c *.c
 	rm -f $@
 	ar -crs $@ AR/*.o
