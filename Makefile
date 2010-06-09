@@ -1,5 +1,6 @@
 CC=gcc
 CFLAGS=-gfull -O0 -I..
+LIBRARIES=-lm
 INCLUDES_LIBRARY=-I..
 INCLUDES_BINARY=-I.
 FULL_CFLAGS_LIBRARY=$(CFLAGS) $(INCLUDES_LIBRARY)
@@ -9,7 +10,7 @@ all: ceilingcat libAR.a libV4LVideo.a
 	echo "BEES"
 
 ceilingcat: src/ceilingcat.c AR/*.h AR/sys/*.h libAR.a libV4LVideo.a
-	$(CC) -o $@ $(FULL_CFLAGS_BINARY) $< -L. -lAR -lV4LVideo
+	$(CC) $(LIBRARIES) $(LDFLAGS) -o $@ $(FULL_CFLAGS_BINARY) $< -L. -lAR -lV4LVideo
 
 libAR.a: AR/*.c AR/*.h AR/sys/*.h
 	cd AR ; $(CC) $(FULL_CFLAGS_LIBRARY) -c *.c
