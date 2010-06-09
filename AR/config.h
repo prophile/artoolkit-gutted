@@ -68,8 +68,9 @@
 /*    AR_INPUT_1394CAM:   use of 1394 Digital Camera            */
 /*                                                              */
 /*--------------------------------------------------------------*/
+
 #ifdef __linux
-#undef  AR_INPUT_V4L
+#define  AR_INPUT_V4L
 #undef  AR_INPUT_DV
 #undef  AR_INPUT_1394CAM
 #undef  AR_INPUT_GSTREAMER
@@ -98,38 +99,6 @@
 #  define  AR_LITTLE_ENDIAN
 #endif
 
-
-/*------------------------------------------------------------*/
-/*  For SGI                                                   */
-/*------------------------------------------------------------*/
-#ifdef __sgi
-#  define  AR_BIG_ENDIAN
-#  undef   AR_LITTLE_ENDIAN
-#  define  AR_DEFAULT_PIXEL_FORMAT AR_PIXEL_FORMAT_ABGR
-#endif
-
-/*------------------------------------------------------------*/
-/*  For Windows                                               */
-/*------------------------------------------------------------*/
-#ifdef _WIN32
-#  undef   AR_BIG_ENDIAN
-#  define  AR_LITTLE_ENDIAN
-#  define  AR_DEFAULT_PIXEL_FORMAT AR_PIXEL_FORMAT_BGRA
-#endif
-
-/*------------------------------------------------------------*/
-/*  For Mac OS X                                              */
-/*------------------------------------------------------------*/
-#ifdef __APPLE__
-#  if defined(__BIG_ENDIAN__) // Check architecture endianess using gcc's macro.
-#    define  AR_BIG_ENDIAN  // Most Significant Byte has greatest address in memory (ppc).
-#    undef   AR_LITTLE_ENDIAN
-#  elif defined (__LITTLE_ENDIAN__)
-#    undef   AR_BIG_ENDIAN   // Least significant Byte has greatest address in memory (i386).
-#    define  AR_LITTLE_ENDIAN
-#  endif
-#  define  AR_DEFAULT_PIXEL_FORMAT AR_PIXEL_FORMAT_ARGB
-#endif
 
 
 /*------------------------------------------------------------*/
@@ -163,50 +132,11 @@
 #    define   DEFAULT_VIDEO_MODE          VIDEO_MODE_NTSC
 #  endif
 
-#  ifdef AR_INPUT_DV
-/* Defines all moved into video.c now - they are not used anywhere else */
-#  endif
-
-#  ifdef AR_INPUT_1394CAM
-/* Defines all moved into video.c now - they are not used anywhere else */
-#  endif
-
 #  define   DEFAULT_IMAGE_PROC_MODE     AR_IMAGE_PROC_IN_FULL
 #  define   DEFAULT_FITTING_MODE        AR_FITTING_TO_IDEAL
 #  define   DEFAULT_DRAW_MODE           AR_DRAW_BY_TEXTURE_MAPPING
 #  define   DEFAULT_DRAW_TEXTURE_IMAGE  AR_DRAW_TEXTURE_HALF_IMAGE
 #endif
-
-#ifdef __sgi
-#  define   VIDEO_FULL                  0
-#  define   VIDEO_HALF                  1
-#  define   DEFAULT_VIDEO_SIZE          VIDEO_FULL
-#  define   DEFAULT_IMAGE_PROC_MODE     AR_IMAGE_PROC_IN_FULL
-#  define   DEFAULT_FITTING_MODE        AR_FITTING_TO_INPUT
-#  define   DEFAULT_DRAW_MODE           AR_DRAW_BY_GL_DRAW_PIXELS
-#  define   DEFAULT_DRAW_TEXTURE_IMAGE  AR_DRAW_TEXTURE_HALF_IMAGE
-#endif
-
-#ifdef _WIN32
-#  define   DEFAULT_IMAGE_PROC_MODE     AR_IMAGE_PROC_IN_FULL
-#  define   DEFAULT_FITTING_MODE        AR_FITTING_TO_INPUT
-#  define   DEFAULT_DRAW_MODE           AR_DRAW_BY_TEXTURE_MAPPING
-#  define   DEFAULT_DRAW_TEXTURE_IMAGE  AR_DRAW_TEXTURE_FULL_IMAGE
-#endif
-
-#ifdef __APPLE__
-#  define   DEFAULT_VIDEO_WIDTH         640
-#  define   DEFAULT_VIDEO_HEIGHT        480
-#  define   DEFAULT_IMAGE_PROC_MODE     AR_IMAGE_PROC_IN_FULL
-#  define   DEFAULT_FITTING_MODE        AR_FITTING_TO_IDEAL
-#  define   DEFAULT_DRAW_MODE           AR_DRAW_BY_TEXTURE_MAPPING
-#  define   DEFAULT_DRAW_TEXTURE_IMAGE  AR_DRAW_TEXTURE_FULL_IMAGE
-#define   APPLE_TEXTURE_FAST_TRANSFER
-#endif
-
-
-/*  For NVIDIA OpenGL Driver  */
-#define    AR_OPENGL_TEXTURE_RECTANGLE
 
 
 
