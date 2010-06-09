@@ -6,7 +6,7 @@ FULL_CFLAGS=$(CFLAGS) $(INCLUDES)
 all: ceilingcat libAR.a libV4LVideo.a
 	echo "BEES"
 
-ceilingcat: ceilingcat.c AR/*.h AR/sys/*.h libAR.a libV4LVideo.a
+ceilingcat: src/ceilingcat.c AR/*.h AR/sys/*.h libAR.a libV4LVideo.a
 	$(CC) -o $@ $(FULL_CFLAGS) $< -L. -lAR -lV4LVideo
 
 libAR.a: AR/*.c AR/*.h AR/sys/*.h
