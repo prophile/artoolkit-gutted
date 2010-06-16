@@ -23,4 +23,4 @@ libV4LVideo.a: VideoLinuxV4L/*.c VideoLinuxV4L/*.h AR/*.h
 	ar -crs $@ VideoLinuxV4L/*.o
 
 clean:
-	rm -f libAR.a AR/*.o VideoLinuxV4L/*.o
+	rm -f *.a AR/*.o VideoLinuxV4L/*.o ceilingcat
