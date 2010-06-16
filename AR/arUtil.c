@@ -18,10 +18,10 @@
 #else
 #include <sys/time.h>
 #endif
+#include <stdlib.h>
 #include <AR/param.h>
 #include <AR/matrix.h>
 #include <AR/ar.h>
-
 
 int        arDebug                 = 0;
 ARUint8*   arImage                 = NULL;
